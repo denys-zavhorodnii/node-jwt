@@ -8,6 +8,43 @@ loadButton.addEventListener("click", fetchData);
 const clearButton = document.body.querySelector(".clear");
 clearButton.addEventListener("click", clear);
 
+const loginForm = document.getElementById('login-form');
+
+
+function handleLogin(cb = () => {}) {
+    loginForm.style.display = "block";
+    const handler = async (event) => {
+        event.stopPropagation();
+        event.preventDefault();
+
+        const data = new FormData(event.target);
+
+        try {
+            const response = await fetch('/login', {
+                method: 'POST',
+                body: JSON.stringify({
+                    login: data.get("login"),
+                    password: data.get("password"),
+                })
+            })
+
+            if (!response.ok) {
+                throw Error('Error occured');
+            }
+            const { token } = await response.json();
+            window.sessionStorage.setItem("token", token);
+
+            loginForm.removeEventListener('submit', handler);
+            loginForm.style.display = "none";
+            cb()
+        } catch (error) {
+            alert(error.message);
+        }
+
+
+    }
+    loginForm.addEventListener('submit', handler)
+}
 
 function clear() {
     const parent = document.body.querySelector(".cat-list");
@@ -18,19 +55,28 @@ async function fetchData() {
     const parent = document.body.querySelector(".cat-list");
     const loader = createLoader();
     parent.appendChild(loader);
+    const headers = {};
+    const token = localStorage.getItem("token");
+
+    if (token) {
+        headers['Authorization'] = 'Bearer ' + localStorage.getItem('token');
+    }
 
     try {
-
-        const response = await fetch(link)
+        const response = await fetch(link, {
+            headers: new Headers(headers)
+        })
 
         if(response.ok) {
             const data = await response.json();
             data.forEach((breed) => {
-                const { name, description, image: { url } = { url: "/img.png" } } = breed;
-                const li =  createItem(name, description, url);
+                const {name, description, image: {url} = {url: "/img.png"}} = breed;
+                const li = createItem(name, description, url);
 
                 parent.appendChild(li);
             });
+        } else if (response.status === 401) {
+            handleLogin(fetchData);
         } else {
             throw new Error(response.statusText);
         }
