@@ -1,47 +1,8 @@
-import fs from 'node:fs';
-
 import Fastify from 'fastify';
-import {getCats} from "./api/get-cats.js";
+import {addApiRoute} from "./routes/proxy.js";
+import {addStaticRoute} from "./routes/static-files.js";
 
-const fastify = Fastify({ logger: true });
-
-
-const API_KEY = "some key";
-
-fastify.get('/*', async (req, reply) => {
-    const path = req.url === '/' ? '/index.html' : req.url
-
-    const file =
-        fs.readFileSync(`./static${path}`);
-    if (req.url.endsWith('.png')) {
-        reply.type('image/png');
-    }
-
-    if (req.url.endsWith('.html')) {
-        reply.type('text/html');
-    }
-
-    if (req.url.endsWith('.css')) {
-        reply.type('text/css');
-    }
-
-    if (req.url.endsWith('.js')) {
-        reply.type('text/javascript');
-    }
-
-    return reply.send(file)
-});
-
-
-fastify.get('/api', async (req, reply) => {
-    const cats = await getCats(fetch, API_KEY)
-
-    reply.type('application/json')
-
-    return reply.send(cats)
-});
-
-
+export const fastify = Fastify({ logger: true });
 
 const start = async () => {
     try {
@@ -52,5 +13,9 @@ const start = async () => {
         process.exit(1);
     }
 };
+
+
+addApiRoute();
+addStaticRoute();
 
 start();

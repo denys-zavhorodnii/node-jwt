@@ -26,7 +26,7 @@ async function fetchData() {
         if(response.ok) {
             const data = await response.json();
             data.forEach((breed) => {
-                const { name, description, image: { url } = { url: "/some-default.jpg" } } = breed;
+                const { name, description, image: { url } = { url: "/img.png" } } = breed;
                 const li =  createItem(name, description, url);
 
                 parent.appendChild(li);
