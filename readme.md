@@ -3,5 +3,5 @@
 - [ ] JWT token structure
 - [ ] Proxy implementation / current project
 - [ ] JWR generation
-- [ ] dotenv
+- [ ] dotenv with `loadEnvFile`
 - [ ] authentification
