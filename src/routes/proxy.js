@@ -14,7 +14,9 @@ export function addApiRoute() {
                 'WWW-Authenticate': 'Bearer',
             })
             reply.code(401)
-            return reply()
+            return reply.send({
+                code: 401,
+            })
         }
 
         const cats = await getCats(fetch, API_KEY)
