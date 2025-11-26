@@ -64,10 +64,10 @@ async function fetchData() {
     const loader = createLoader();
     parent.appendChild(loader);
     const headers = {};
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
 
     if (token) {
-        headers['Authorization'] = 'Bearer ' + localStorage.getItem('token');
+        headers['Authorization'] = 'Bearer ' + token;
     }
 
     try {
