@@ -13,6 +13,9 @@ const loginForm = document.getElementById('login-form');
 
 function handleLogin(cb = () => {}) {
     loginForm.style.display = "block";
+    const reset = () => {
+        loginForm.style.display = "none";
+    }
     const handler = async (event) => {
         event.stopPropagation();
         event.preventDefault();
@@ -22,6 +25,9 @@ function handleLogin(cb = () => {}) {
         try {
             const response = await fetch('/login', {
                 method: 'POST',
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                }),
                 body: JSON.stringify({
                     login: data.get("login"),
                     password: data.get("password"),
@@ -35,6 +41,7 @@ function handleLogin(cb = () => {}) {
             window.sessionStorage.setItem("token", token);
 
             loginForm.removeEventListener('submit', handler);
+            loginForm.removeEventListener('submit', reset);
             loginForm.style.display = "none";
             cb()
         } catch (error) {
@@ -44,6 +51,7 @@ function handleLogin(cb = () => {}) {
 
     }
     loginForm.addEventListener('submit', handler)
+    loginForm.addEventListener('reset', reset)
 }
 
 function clear() {
