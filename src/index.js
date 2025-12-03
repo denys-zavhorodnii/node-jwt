@@ -2,6 +2,7 @@ import Fastify from 'fastify';
 import {addApiRoute} from "./routes/proxy.js";
 import {addStaticRoute} from "./routes/static-files.js";
 import {addLoginRoute} from "./routes/login.js";
+import {authHook} from "./hooks/auth.js";
 
 export const fastify = Fastify({ logger: true });
 
@@ -19,5 +20,7 @@ const start = async () => {
 addApiRoute();
 addStaticRoute();
 addLoginRoute();
+
+fastify.addHook('onRequest', authHook)
 
 start();
