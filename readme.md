@@ -1,5 +1,6 @@
 # Topics to discuss
 
+## Session 1: JWT and proxy server
 - [x] IDE configuration
 - [x] JWT token structure
 - [x] Proxy implementation / current project
@@ -8,3 +9,35 @@
 - [x] JWT generation https://www.npmjs.com/package/jsonwebtoken
 - [x] dotenv with `loadEnvFile` https://nodejs.org/api/process.html#processloadenvfilepath
 - [x] authentification
+
+## Session 2: Unit testing
+
+### Topics
+
+- [ ] Jest configuration
+- [ ] Babel, why?
+- [ ] Basic test structure, AAA pattern and nesting in Jest
+- [ ] First tests
+
+### Install Jest
+
+See https://jestjs.io/docs/getting-started
+
+- `npm install --save-dev jest`
+- extend `package.json` with `test` command
+- `npm install --save-dev @babel/core @babel/preset-env babel-jest`
+- create `babel.config.cjs` file
+```js
+module.exports = {
+    presets: [
+        [
+            '@babel/preset-env',
+            {
+                targets: {
+                    node: 'current',
+                },
+            },
+        ],
+    ],
+};
+```
