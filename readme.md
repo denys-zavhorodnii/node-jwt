@@ -41,3 +41,12 @@ module.exports = {
     ],
 };
 ```
+## Session #3: Patterns
+
+- [ ] IoC container
+- [ ] singleton
+- [ ] decorator
+- [ ] facade
+- [ ] observer
+- [ ] command
+- [ ] state
