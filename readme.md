@@ -14,10 +14,10 @@
 
 ### Topics
 
-- [ ] Jest configuration
-- [ ] Babel, why?
-- [ ] Basic test structure, AAA pattern and nesting in Jest
-- [ ] First tests
+- [x] Jest configuration
+- [x] Babel, why?
+- [x] Basic test structure, AAA pattern and nesting in Jest
+- [x] First tests
 
 ### Install Jest
 
