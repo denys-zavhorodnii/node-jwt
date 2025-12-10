@@ -46,7 +46,12 @@ module.exports = {
 - [ ] IoC container
 - [ ] singleton
 - [ ] decorator
+  - [ ] logging token creation
 - [ ] facade
+  - [ ] facade for response
 - [ ] observer
+  - [ ] logging requests
 - [ ] command
+  - [ ] artificial example
 - [ ] state
+  - [ ] artificial example
