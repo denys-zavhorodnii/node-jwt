@@ -43,8 +43,9 @@ module.exports = {
 ```
 ## Session #3: Patterns
 
-- [ ] IoC container
-- [ ] singleton
+- [x] IoC container
+- [x] singleton
+- 
 - [ ] decorator
   - [ ] logging token creation
 - [ ] facade
