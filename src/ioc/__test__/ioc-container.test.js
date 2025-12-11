@@ -20,7 +20,7 @@ describe('iocContainer', () => {
         expect(res).toBe(dep)
     })
 
-    it('should be able resolve a multiple dependencies', () => {
+    it('should be able to resolve a multiple dependencies', () => {
         const container = IoCContainer.getInstance()
         const dep = new MockClassB(container.resolve('Foo'))
         container.register('New', () => dep)
